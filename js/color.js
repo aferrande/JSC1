@@ -21,7 +21,7 @@ const colorMap = {
     Loyalty: "cpBlue",
     Competence: "cpBlue",
     Compassion: "cpPink",
-    Sincetity: "cpPink",
+    Sincerity: "cpPink",
     Sweet: "cpPink",
     Royalty: "cpPurple",
     Luxury: "cpPurple",
