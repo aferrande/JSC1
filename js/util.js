@@ -1,4 +1,5 @@
 const offscreen = "offscreen";
+const ND = "nodisplay"
 
 // Math.random = () => (crypto || msCrypto).getRandomValues(new Uint32Array(1))[0] / 4294967296
 

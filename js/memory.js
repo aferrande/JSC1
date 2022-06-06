@@ -1,4 +1,3 @@
-const ND = "nodisplay"
 const mgD = "mgDirections"
 const mgHS = "mgHighScore"
 
