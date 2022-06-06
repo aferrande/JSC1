@@ -1,8 +1,8 @@
-let isCpuTurn = false;
+const gDir = `gameDirections`;
 
-let tttScore;
+let CPUTurno = false;
 
-const tttKey = "ticTacToeScore";
+let tttPont;
 
 const hasX = id => {
     return getById(id).classList.contains("x");
@@ -14,22 +14,21 @@ const hasO = id => {
 
 const hasXorO = id => {
     return (
-        getById(id).classList.contains("x") ||
-        getById(id).classList.contains("o")
+        getById(id).classList.contains("x") ||getById(id).classList.contains("o")
     );
 }
 
-const getScoringId = array => {
+const pontuar = array => {
     for(let i = 0; i < array.length; i++){
         const data = array[i];
         if(data[0] && data[1] && data[2]){
-            return data[3];
+        return data[3];
         }
     }
 }
 
-const getXScoringChances = () => {
-    const combinations = [
+const XnaBoard = () => {
+    const combina = [
         [!hasXorO(1), hasX(2), hasX(3), 1], // horizontal [ox!=1, x=2, x=3]
         [hasX(1), !hasXorO(2), hasX(3), 2], // horizontal [x=1, ox!=2, x=3]
         [hasX(1), hasX(2), !hasXorO(3), 3], // horizontal [x=1, x=2, ox!=3]
@@ -62,11 +61,11 @@ const getXScoringChances = () => {
         [hasX(3), !hasXorO(5), hasX(7), 5], // diagnal [x=3, ox!=5, x=7]
         [hasX(3), hasX(5), !hasXorO(7), 7], // diagnal [x=3, x=5, ox!=7]
     ];
-    return combinations;
+    return combina;
 }
 
-const hasXScored = () => {
-    const combinations = [
+const Xlinha = () =>{
+    const combina = [
         [hasX(1), hasX(2), hasX(3)],
         [hasX(4), hasX(5), hasX(6)],
         [hasX(7), hasX(8), hasX(9)],
@@ -76,17 +75,17 @@ const hasXScored = () => {
         [hasX(1), hasX(5), hasX(9)],
         [hasX(3), hasX(5), hasX(7)],
     ];
-    for(let x = 0; x < combinations.length; x++){
-        const data = combinations[x];
-        if(data[0] && data[1] && data[2]){
-            return true;
+    for(let x = 0; x < combina.length; x++){
+        const data = combina[x];
+            if(data[0] && data[1] && data[2]){ 
+                return true;
         }
     }
     return false;
 }
 
-const getOScoringChances = () => {
-    const combinations = [
+const OnaBoard = () => {
+    const combina = [
         [!hasXorO(1), hasO(2), hasO(3), 1], // horizontal [ox!=1, x=2, x=3]
         [hasO(1), !hasXorO(2), hasO(3), 2], // horizontal [x=1, ox!=2, x=3]
         [hasO(1), hasO(2), !hasXorO(3), 3], // horizontal [x=1, x=2, ox!=3]
@@ -119,113 +118,110 @@ const getOScoringChances = () => {
         [hasO(3), !hasXorO(5), hasO(7), 5], // diagnal [x=3, ox!=5, x=7]
         [hasO(3), hasO(5), !hasXorO(7), 7], // diagnal [x=3, x=5, ox!=7]
     ];
-    return combinations;
+    return combina;
 }
 
-const allBoxesTaken = () => {
-    const combinations = [
+const BoardCheia = () => {
+    const combina = [
         hasXorO(1), hasXorO(2), hasXorO(3),
         hasXorO(4), hasXorO(5), hasXorO(6),
         hasXorO(7), hasXorO(8), hasXorO(9),
     ];
-    return !combinations.includes(false);
+    return !combina.includes(false);
 }
 
-const getRandomBox = () => {
-    const openSquares = [];
+const SelJogada = () => {
+    const QL = [];
     for(let i = 1; i < 10; i++){
         if(!hasXorO(i)){
-            openSquares.push(i);
+             QL.push(i);
         }
     }
-    const index = Math.floor(Math.random() * openSquares.length);
-    return openSquares[index];
+    const index = Math.floor(Math.random() * QL.length);
+    return QL[index];
+    // return RandomizeArray2(QL)
 }
 
-const resetGame = () => {
-    isCpuTurn = false;
-    toggleAttribute(getById("tikTacToeHome"), "nodisplay");
-    toggleAttribute(getById("tikTacToeBoard"), "nodisplay");
-    const allSquares = document.getElementsByClassName("tictactoe");
-    for(let i = 0; i < allSquares.length; i++){
-        allSquares[i].classList.remove("x");
-        allSquares[i].classList.remove("o");
+const resetar = () => {
+    CPUTurno = false;
+    getById("tikTacToeHome").removeAttribute(ND);
+    getById("tikTacToeBoard").setAttribute(ND, "");
+    const Clear = document.getElementsByClassName("tictactoe");
+    for(let i = 0; i < Clear.length; i++){
+        Clear[i].classList.remove("x");
+        Clear[i].classList.remove("o");
     }
 }
 
 const makeCpuSelection = square => {
-    isCpuTurn = false;
+    CPUTurno = false;
     getById(square).classList.add("o");
 }
 
-const playerScore = ply => {
-    isCpuTurn = false;
+const PScore = ply => {
+    CPUTurno = false;
     if(ply === "ply"){
-        tttScore.wins = tttScore.wins + 1;
+        tttPont.wins++
     } else {
-        tttScore.losses = tttScore.losses + 1;
+        tttPont.losses++
     }
-    setTicTacToeScore(tttScore);
+    SetarPont(tttPont);
     setTimeout(() => {
-        resetGame();
+        resetar()
     }, 2000);
 }
 
-const makeComputerMove = () => {
-    const cpuScoreId = getScoringId(getOScoringChances());
-    const plyScoreId = getScoringId(getXScoringChances());
-    if(cpuScoreId){
-        makeCpuSelection(`${cpuScoreId}`);
-        playerScore("cpu");
-    } else if(plyScoreId){
-        makeCpuSelection(`${plyScoreId}`);
+const JogadaCPU = () => {
+    const VCPU = pontuar(OnaBoard());
+    const VJog = pontuar(XnaBoard());
+    if(VCPU){
+        makeCpuSelection(`${VCPU}`);
+        PScore("cpu");
+    } else if(VJog){
+        makeCpuSelection(`${VJog}`);
     } else {
-        makeCpuSelection(getRandomBox());
+        makeCpuSelection(SelJogada())
     }
 }
 
 const selectSquare = id => {
-    if(!isCpuTurn && !hasXorO(id)){
+    if(!CPUTurno && !hasXorO(id)){
         getById(id).classList.add("x");
-        if(hasXScored()){
-            playerScore("ply");
-        } else if(allBoxesTaken()){
-            setTimeout(() => {
-                resetGame();
-            }, 2000);
-        } else {
-            isCpuTurn = true;
-            setTimeout(() => {
-                makeComputerMove();
-            }, 1000);
-        }
+            if(Xlinha()){
+                PScore("ply")
+            } else if(BoardCheia()){
+                setTimeout(() => {
+                    resetar()
+                }, 2000);;
+            }   else {
+                CPUTurno = true;
+                setTimeout(() => {
+                    JogadaCPU();
+                }, 1000);}
     }
 }
 
 const showDirections = () => {
-    const gameDirections = getById("gameDirections");
-    toggleAttribute(gameDirections, "nodisplay");
-    const tikTacToeHome = getById("tikTacToeHome");
-    toggleAttribute(tikTacToeHome, "nodisplay");
+    getById(`tikTacToeHome`).setAttribute(ND, ``)
+    getById(gDir).removeAttribute(ND)
 }
 
 const startGame = () => {
-    const gameDirections = getById("gameDirections");
-    toggleAttribute(gameDirections, "nodisplay");
-    const tikTacToeBoard = getById("tikTacToeBoard");
-    toggleAttribute(tikTacToeBoard, "nodisplay");
+    getById(gDir).setAttribute(ND, ``)
+    getById(`tikTacToeBoard`).removeAttribute(ND)
 }
 
-const setTicTacToeScore = score => {
-    const ticTacToeScore = localStorage.getItem(tttKey);
-    if(!ticTacToeScore){
-        localStorage.setItem(tttKey, JSON.stringify({wins: 0, losses: 0}));
+
+const SetarPont = ponto => {
+    const Pontuação = localStorage.getItem("ticTacToeScore");
+    if(!Pontuação){
+        localStorage.setItem("ticTacToeScore", JSON.stringify({wins: 0, losses: 0}));
     }
-    if(score){
-        localStorage.setItem(tttKey, JSON.stringify(score));
+    if(ponto){
+        localStorage.setItem("ticTacToeScore", JSON.stringify(ponto));
     }
-    tttScore = JSON.parse(localStorage.getItem(tttKey));
-    getById("tictactoeScore").innerText = `${tttScore.wins}/${tttScore.losses}`;
+    tttPont = JSON.parse(localStorage.getItem("ticTacToeScore"));
+    getById("tictactoeScore").innerText = `${tttPont.wins}/${tttPont.losses}`;
 }
 
-setTicTacToeScore();
+SetarPont();
