@@ -91,7 +91,6 @@ let mgCount = () => {
 
 let makeMemoryGuess = id => {
     if(TurnoCPU) return;
-    debugger
     if (id === Blinks[click]){ 
         click++;
         if (click === Blinks.length){ 
