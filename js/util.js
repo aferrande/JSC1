@@ -28,10 +28,10 @@ const Randomize = (chara) => {
     return chara[index];
 }
 
-const RandomizeArray = (array) => {
-    const index = Math.floor((secureMathRandom() * array.length));
-    return array[index];
-}
+// const RandomizeArray = (array) => {
+//     const index = Math.floor((secureMathRandom() * array.length));
+//     return array[index];
+// }
 
 //not secure randomize
 const RandomizeArray2 = (array) => {

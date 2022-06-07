@@ -14,7 +14,7 @@ const hasO = id => {
 
 const hasXorO = id => {
     return (
-        getById(id).classList.contains("x") ||getById(id).classList.contains("o")
+        getById(id).classList.contains("x") || getById(id).classList.contains("o")
     );
 }
 
@@ -137,9 +137,7 @@ const SelJogada = () => {
              QL.push(i);
         }
     }
-    const index = Math.floor(Math.random() * QL.length);
-    return QL[index];
-    // return RandomizeArray2(QL)
+    return Randomize(QL)
 }
 
 const resetar = () => {
@@ -172,6 +170,7 @@ const PScore = ply => {
 }
 
 const JogadaCPU = () => {
+    debugger
     const VCPU = pontuar(OnaBoard());
     const VJog = pontuar(XnaBoard());
     if(VCPU){
@@ -183,6 +182,8 @@ const JogadaCPU = () => {
         makeCpuSelection(SelJogada())
     }
 }
+
+//`${VJog}`
 
 const selectSquare = id => {
     if(!CPUTurno && !hasXorO(id)){
