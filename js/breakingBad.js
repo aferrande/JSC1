@@ -2,7 +2,7 @@ const getQuote = () => {
 const { 
     quote, 
     author 
-} = RandomizeArray(quotes);
+} = Randomize(quotes);
 getById("quoteText").innerText = quote;
 getById("breakingBadAuthor").innerText = author;
 }

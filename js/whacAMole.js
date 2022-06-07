@@ -1,4 +1,4 @@
-// let random = null;
+let random = null;
 
 let initialCount = 0;
 
@@ -35,6 +35,20 @@ const flashRed = className => {
     }, 250);
 }
 
+// const hideMole = className => {
+//     const hitMole = document.querySelector(`.whacAMole.${className}.mole`)
+//     hitMole.classList.remove("mole")
+//     let delay = 1000
+//     setTimeout(() => {
+//         const randomIndex2 = Math.floor(Math.random() * whacPositions.length);
+//         const newMolePosition2 = whacPositions[randomIndex2];
+//         document.querySelector(`.whacAMole.${newMolePosition2}`).classList.add("mole")
+        
+//     }, delay);
+//         delay += 1000
+   
+// }
+
 const changeMolePosition = () => {
     const mole = document.querySelector(".whacAMole.mole");
     mole.classList.remove("mole");
@@ -46,6 +60,7 @@ const changeMolePosition = () => {
 const increamentWhacCount = () => {
     const currentCount = parseInt(getById("whacAMoleCount").innerText);
     getById("whacAMoleCount").innerText = currentCount + 1;
+    
 }
 
 const whacMole = className => {
@@ -55,11 +70,12 @@ const whacMole = className => {
     if(hitMole){
         increamentWhacCount();
         flashRed(className);
+        // hideMole(className);
     }
 }
 
 const randomizeMole = () => {
-    changeMolePosition();
+    changeMolePosition()
     random = setInterval(() => {
         changeMolePosition();
     }, 500);
