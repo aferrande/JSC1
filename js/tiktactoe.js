@@ -159,9 +159,9 @@ const makeCpuSelection = square => {
 const PScore = ply => {
     CPUTurno = false;
     if(ply === "ply"){
-        tttPont.wins++
+        tttPont.vitórias++
     } else {
-        tttPont.losses++
+        tttPont.derrotas++
     }
     SetarPont(tttPont);
     setTimeout(() => {
@@ -170,7 +170,6 @@ const PScore = ply => {
 }
 
 const JogadaCPU = () => {
-    debugger
     const VCPU = pontuar(OnaBoard());
     const VJog = pontuar(XnaBoard());
     if(VCPU){
@@ -216,13 +215,13 @@ const startGame = () => {
 const SetarPont = ponto => {
     const Pontuação = localStorage.getItem("ticTacToeScore");
     if(!Pontuação){
-        localStorage.setItem("ticTacToeScore", JSON.stringify({wins: 0, losses: 0}));
+        localStorage.setItem("ticTacToeScore", JSON.stringify({vitórias: 0, derrotas: 0}));
     }
     if(ponto){
         localStorage.setItem("ticTacToeScore", JSON.stringify(ponto));
     }
     tttPont = JSON.parse(localStorage.getItem("ticTacToeScore"));
-    getById("tictactoeScore").innerText = `${tttPont.wins}/${tttPont.losses}`;
+    getById("tictactoeScore").innerText = `${tttPont.vitórias}/${tttPont.derrotas}`;
 }
 
 SetarPont();
