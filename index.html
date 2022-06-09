@@ -286,10 +286,10 @@
                 <p class="panelHeader">Game Score Settings</p>
                 <div id="gameSettings" class="flex sizeWithHeader">
                     <div class="flexCol alignStart">
-                        <div><input type="checkbox"> Memory Game</div>
-                        <div><input type="checkbox"> Tik Tac Toe</div>
-                        <div><input type="checkbox"> Whak A Mole</div>
-                        <div id="GameResetBtn" class="btn">Reset Score(s)</div>
+                        <div><input id="mmg" type="checkbox"> Memory Game</div>
+                        <div><input id="ttt" type="checkbox"> Tik Tac Toe</div>
+                        <div><input id="wam" type="checkbox"> Whak A Mole</div>
+                        <div id="GameResetBtn" class="btn" onclick="resetScores()">Reset Score(s)</div>
                     </div>
                     <div id="statsImg"></div>
                 </div>
@@ -492,6 +492,8 @@
         <script src="./js/memory.js"></script>
         <script src="./js/tiktactoe.js"></script>
         <script src="./js/whacAMole.js"></script>
+        <script src="./js/settings.js"></script>
+
 
         <!-- APIs -->
         <script src="./js/inspirationalQuote.js"></script>

@@ -55,6 +55,7 @@ const changeMolePosition = () => {
     const randomIndex = Math.floor(Math.random() * whacPositions.length);
     const newMolePosition = whacPositions[randomIndex];
     document.querySelector(`.whacAMole.${newMolePosition}`).classList.add("mole");
+
 }
 
 const increamentWhacCount = () => {
@@ -70,6 +71,7 @@ const whacMole = className => {
     if(hitMole){
         increamentWhacCount();
         flashRed(className);
+        // changeMolePosition()
         // hideMole(className);
     }
 }
