@@ -1,7 +1,8 @@
-// const pokemon = { 
-//     method: "GET",
-//     // headers: { "Accept": "application/json" }
-// }
+const pokemon = { 
+    method: "GET",
+    headers: { "Accept": "application/json" }
+}
+
 
 const Reset = () => {
     let pokemonName = getById("pokemonSearch").value;
@@ -32,8 +33,8 @@ const getPokemonInfo = () => {
                 getById("pokemonType").innerText = pokemon.types[0].type.name;
                 getById("pokemonAtk").innerText = pokemon.stats[1].base_stat;
                 getById("pokemonDef").innerText = pokemon.stats[2].base_stat;
-                getById("noresult").setAttribute("href", 'https://pokemondb.net/pokedex/national');
-                getById("noresult").innerText = "Encontre outros pokemons aqui.";   
+                getById("noresult").setAttribute("href", `https://pokemondb.net/pokedex/${pokemonName}`);
+                getById("noresult").innerText = `${pokemonName}`;   
                 })
             if (pokemonName.length > 0 && getById("pokemon").style.backgroundImage === "") {getById("noresult").innerText = "Pokemon não encontrado. Busque aqui"};
                 
