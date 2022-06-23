@@ -15,8 +15,7 @@ const Reset = () => {
             getById("pokemonType").innerText = "";
             getById("pokemonAtk").innerText = "";
             getById("pokemonDef").innerText = "";
-            getById("noresult").innerText = "Encontre outros pokemons aqui.";
-            console.log(pokemon)}
+            getById("noresult").innerText = "Encontre outros pokemons aqui.";}
 }
 
 const getPokemonInfo = () => {
@@ -36,15 +35,8 @@ const getPokemonInfo = () => {
                 getById("noresult").setAttribute("href", 'https://pokemondb.net/pokedex/national');
                 getById("noresult").innerText = "Encontre outros pokemons aqui.";   
                 })
-                console.log(pokemon)
-                // if (fetch() = false) {getById("noresult").innerText = "Pokemon não encontrado. Busque aqui"}
+            if (pokemonName.length > 0 && getById("pokemon").style.backgroundImage === "") {getById("noresult").innerText = "Pokemon não encontrado. Busque aqui"};
                 
             }).catch(err => {console.log(err); })
     Reset()  
 }
-
-
-
-
-// display a message whenever no results are found
-
