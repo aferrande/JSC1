@@ -16,10 +16,10 @@ const DSemana = () => {
 DSemana()
 
 const InspQuote = () => {
-    fetch("https://type.fit/api/quotes").then(data => {
-    data.json().then(dataGET => {
-        getById("dailyInspirationalQuote").innerText = Randomize(dataGET).text;})
-    }).catch(err => console.log(err));
+    fetch("https://type.fit/api/quotes").then(resp => 
+    resp.json()).then(data => {
+        getById("dailyInspirationalQuote").innerText = Randomize(data).text;})
+    .catch(err => console.log(err));
 }
 InspQuote()
 

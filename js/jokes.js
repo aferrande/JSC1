@@ -1,11 +1,13 @@
+const url = 'https://icanhazdadjoke.com/'
+
 const dataGET = { 
-    method: "GET",
-    headers: { "Accept": "application/json" }
+    method: 'GET',
+    headers: { 'Accept': 'application/json' }
 }
 
-getNewJoke = () => {
-fetch("https://icanhazdadjoke.com/").then(dod => {
-    dod.json().then(dataGET => {
+const getNewJoke = () => {
+fetch(url, dataGET).then(resp => {
+    resp.json().then(dataGET => {
         getById("jokeText").innerText = dataGET.joke;
     })
 }).catch(err => console.log(err))

@@ -1,7 +1,7 @@
-const pokemon = { 
-    method: "GET",
-    headers: { "Accept": "application/json" }
-}
+// const pokemon = { 
+//     method: "GET",
+//     headers: { "Accept": "application/json" }
+// }
 
 
 const Reset = () => {
@@ -21,9 +21,9 @@ const Reset = () => {
 
 const getPokemonInfo = () => {
     let pokemonName = getById("pokemonSearch").value;
-        fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName.toLowerCase()}`).then(d => {
-            d.json().then(pokemon => 
-        {
+        fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName.toLowerCase()}`)
+        .then(resp => resp.json())
+        .then(pokemon => {
                 getById("pokemon").style.backgroundImage = `url(${pokemon.sprites.other.dream_world.front_default})`;
                 getById("pokemonId").innerText = pokemon.id;
                 getById("pokemonName").innerText = pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
@@ -36,8 +36,7 @@ const getPokemonInfo = () => {
                 getById("noresult").setAttribute("href", `https://pokemondb.net/pokedex/${pokemonName}`);
                 getById("noresult").innerText = `${pokemonName}`;   
                 })
-            if (pokemonName.length > 0 && getById("pokemon").style.backgroundImage === "") {getById("noresult").innerText = "Pokemon não encontrado. Busque aqui"};
-                
-            }).catch(err => {console.log(err); })
+        .catch(err => console.log(err));
+            if (pokemonName.length > 0 && getById("pokemon").style.backgroundImage === "") {getById("noresult").innerText = "Pokemon não encontrado. Busque aqui"};       
     Reset()  
 }
