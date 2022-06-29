@@ -1,4 +1,4 @@
-DN = "displayNone"
+
 MD = "meditationDirections"
 
 const breatheIn = () =>{
