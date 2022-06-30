@@ -1,12 +1,13 @@
 let APIkey;
 const select = "Select a Product";
+const selprice = "selectedPrice"
 const setprice = "Set Price of Product";
 const selProd = "selectedProduct";
 const SPC = "setPriceContainer";
 const iSel = "itemSelection";
-let update = false;
-let updateId;
-let updating;
+let update = false; //isUpdating
+// let updateId; //updatingId
+let updating; //updatingObj
 
 const Prod2Shelf = products => {
     getById("pricedItems").innerHTML = "";
@@ -15,11 +16,9 @@ const Prod2Shelf = products => {
         const productDiv = getProductElement(data);
         const update = getUpdateBtn(data);
         const deleteBtn = getDeleteBtn(data);
-    
         div.appendChild(productDiv);
         div.appendChild(update);
         div.appendChild(deleteBtn);
-    
         getById("pricedItems").appendChild(div);
     });
 }
@@ -50,7 +49,6 @@ const updateProduct = id => {
     show(SPC);
     getById(selProd).style.backgroundImage = `url(${id.imagem})`;
     update = true;
-    updateId = id._id;
     updating = id;
 }
 
@@ -64,9 +62,7 @@ const getUpdateBtn = product => {
 }
 
 const deleteItem = (id) => {
-    show(iSel)
-    productHelpText(select)
-    hide(SPC)
+    ResetShop()
     fetch(getURL(id),  {
         method: 'DELETE'
 }).then(data => loadStore())
@@ -137,7 +133,7 @@ const ResetShop = () => {
 }
 
 const onAdd = () => {
-    let price = getById("selectedPrice").value;
+    let preço = getById(selprice).value;
     const img = getById(selProd).style.backgroundImage;
     const imgArr = img.split('"');
     ResetShop()
@@ -147,7 +143,7 @@ const onAdd = () => {
         headers: {  "Accept": "application/json",
                     "Content-Type": "application/json"
         },
-        body: JSON.stringify({custo: price, imagem: imgArr[1]})
+        body: JSON.stringify({custo: preço, imagem: imgArr[1]})
     }).then(resp => resp.json()
         .then(data => loadStore())
         .catch(err => console.log(err)))
@@ -157,10 +153,10 @@ const onAdd = () => {
         update = false;
         const body = {
             ...updating,
-            custo: price
+            custo: preço
         }
         delete body._id
-        fetch(getURL(updateId), {
+        fetch(getURL(updating._id), {
         method: 'PUT',
         headers: {  "Accept": "application/json",
                     "Content-Type": "application/json"
@@ -169,4 +165,5 @@ const onAdd = () => {
     }).then(data => loadStore())
     .catch(err => console.log(err))
     }
+getById(selprice).value = "";
 }
