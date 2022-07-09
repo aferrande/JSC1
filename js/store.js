@@ -1,4 +1,5 @@
 let APIkey;
+let numProdShelf;
 const select = "Select a Product";
 const selprice = "selectedPrice"
 const setprice = "Set Price of Product";
