@@ -43,9 +43,9 @@ let SetHtml = (hora, min, seg) => {
 }
 
 let SetDate = () => {
-   h = Hora();
-   m =  Minuto();
-   s = Segundos();
+   let h = Hora();
+   let m =  Minuto();
+   let s = Segundos();
      SetHtml(h, m, s)
 }
 
